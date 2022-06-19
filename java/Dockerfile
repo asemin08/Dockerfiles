@@ -1,5 +1,5 @@
-ARG image=""
-ARG tag=""
+ARG image="openjdk"
+ARG tag="11-jdk-slim"
 
 FROM ${image}:${tag}
 
