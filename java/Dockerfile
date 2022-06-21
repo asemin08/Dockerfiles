@@ -5,6 +5,10 @@ FROM ${image}:${tag}
 
 ARG Maitener=""
 
+# Copy jar file
+
+COPY app.jar app.jar
+
 # On retire les priviléges de l'utilisateur root.
 
 RUN useradd user
