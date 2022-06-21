@@ -12,6 +12,11 @@ pipeline {
     }
 
     stages {
+	stage('Clean workspace'){
+            steps{
+            	cleanWs()
+            }
+        }
         
         stage('Récupération du Dockerfiles'){
             steps{
