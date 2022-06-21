@@ -42,7 +42,7 @@ pipeline {
         stage('Docker build Image') {
             steps {
                 dir("${params.typeApp}") {
-                    sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"image=${params.image}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
+                    sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
                 }
             }
         }
