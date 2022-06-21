@@ -25,8 +25,8 @@ pipeline {
         stage('Récupération du Dockerfiles'){
             steps{
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/asemin08/Dockerfiles.git'
-                withCredentials([usernameColonPassword(credentialsId: 'nexus-repository', variable: 'nexus-cred')]) {
-                    sh "curl -L -u \"$nexus-cred\" -X GET \"http://146.59.154.110:8081/nexus/service/rest/v1/search/assets/download?sort=version&direction=desc&repository=${params.repository}&maven.groupId=${params.groupId}&maven.artifactId=${params.artifactId}&maven.baseVersion=${params.version}&maven.extension=${params.extension}\" -H \"accept: application/json\" -o app.jar"
+                withCredentials([usernameColonPassword(credentialsId: 'nexus-repository', variable: 'nexus')]) {
+                    sh "curl -L -u ${nexus} -X GET \"http://146.59.154.110:8081/nexus/service/rest/v1/search/assets/download?sort=version&direction=desc&repository=${params.repository}&maven.groupId=${params.groupId}&maven.artifactId=${params.artifactId}&maven.baseVersion=${params.version}&maven.extension=${params.extension}\" -H \"accept: application/json\" -o app.jar"
                 }
                 sh "ls"
             }
