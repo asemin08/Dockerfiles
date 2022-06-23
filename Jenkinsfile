@@ -23,6 +23,11 @@ pipeline {
         }
         
         stage('Récupération du Dockerfiles'){
+            when {
+                {
+                    equals expected: "java", actual: params.typeApp
+                }
+            }
             steps{
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/asemin08/Dockerfiles.git'
 
