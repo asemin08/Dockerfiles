@@ -13,6 +13,7 @@ pipeline {
         string defaultValue: 'GestionCompteTest', description: 'artifactId du projet', name: 'artifactId'
         string defaultValue: 'eu.esnup', description: 'groupId du projet', name: 'groupId'
         string defaultValue: 'maven-snapshots', description: 'Repository nexus', name: 'repository'
+        booleanParam(name: 'useNexus', defaultValue: true, description: 'utilisation nexus')
     }
 
     stages {
@@ -25,7 +26,7 @@ pipeline {
         stage('Récupération du Dockerfiles'){
             when {
                 {
-                    equals expected: "java", actual: params.typeApp
+                    equals expected: false, actual: params.useNexus
                 }
             }
             steps{
