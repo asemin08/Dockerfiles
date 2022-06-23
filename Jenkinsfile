@@ -25,7 +25,7 @@ pipeline {
         
         stage('Récupération du Dockerfiles'){
             when {
-                {
+                not {
                     equals expected: false, actual: params.useNexus
                 }
             }
