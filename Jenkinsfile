@@ -49,7 +49,7 @@ pipeline {
         stage('Docker build Image') {
             steps{
                 script{
-                    if(${params.exposePort} == ""){
+                    if(params.exposePort == ""){
                         sh('ls')
                     }else {
                         echo "toto"
