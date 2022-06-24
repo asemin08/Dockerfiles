@@ -50,17 +50,16 @@ pipeline {
             steps{
                 script{
                     if(params.exposePort == ""){
-                        sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile-withoutExpose ."
+                        dir("${params.typeApp}") {
+                            sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile-withoutExpose ."
+                        }
                     }else {
-                        sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"EXPOSE_PORT=${params.exposePort}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
+                        dir("${params.typeApp}") {
+                            sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"EXPOSE_PORT=${params.exposePort}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
+                        }
                     }
                 }
             }
-            // steps {
-            //     dir("${params.typeApp}") {
-            //         sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
-            //     }
-            // }
         }
         stage('Docker login') {
             steps {
