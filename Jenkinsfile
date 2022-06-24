@@ -14,6 +14,7 @@ pipeline {
         string defaultValue: 'eu.esnup', description: 'groupId du projet', name: 'groupId'
         string defaultValue: 'maven-snapshots', description: 'Repository nexus', name: 'repository'
         booleanParam(name: 'useNexus', defaultValue: true, description: 'utilisation nexus')
+        string defaultValue: '8080', description: 'Port à exposer dans lapp', name: 'exposePort'
     }
 
     stages {
@@ -46,11 +47,20 @@ pipeline {
             }
         }
         stage('Docker build Image') {
-            steps {
-                dir("${params.typeApp}") {
-                    sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
+            steps{
+                script{
+                    if(${params.exposePort} == ""){
+                        sh('ls')
+                    }else {
+                        echo "toto"
+                    }
                 }
             }
+            // steps {
+            //     dir("${params.typeApp}") {
+            //         sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
+            //     }
+            // }
         }
         stage('Docker login') {
             steps {
