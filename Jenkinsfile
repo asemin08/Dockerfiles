@@ -50,9 +50,9 @@ pipeline {
             steps{
                 script{
                     if(params.exposePort == ""){
-                        sh('ls')
+                        sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile-withoutExpose ."
                     }else {
-                        echo "toto"
+                        sh "docker build --no-cache --build-arg \"image=${params.image}\" --build-arg \"EXPOSE_PORT=${params.exposePort}\" --build-arg \"Maitener=${params.Maitener}\" --build-arg \"tag=${params.tag}\" -t ${params.newImage}:${params.newTag} -f Dockerfile ."
                     }
                 }
             }

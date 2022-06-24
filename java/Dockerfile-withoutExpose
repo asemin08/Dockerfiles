@@ -19,6 +19,4 @@ USER user:user
 
 # On démarre l'application Spring à l'aide de java.
 
-EXPOSE ${EXPOSE_PORT}
-
 ENTRYPOINT ["java","-jar","app.jar"]
