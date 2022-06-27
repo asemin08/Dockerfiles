@@ -21,6 +21,3 @@ USER user:user
 
 
 ENTRYPOINT ["java","-jar","app.jar"]
-
-EXPOSE $exposePort
-
